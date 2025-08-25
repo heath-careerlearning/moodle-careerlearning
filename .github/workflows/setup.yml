@@ -1,0 +1,51 @@
+name: Moodle Setup and Testing
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: moodle_test
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        ports:
+          - 3306:3306
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, dom, filter, gd, iconv, json, mbstring, openssl, pdo, tokenizer, xml, zip, curl, soap, opcache
+        coverage: none
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget unzip
+    
+    - name: Test Moodle download
+      run: |
+        wget --spider https://download.moodle.org/stable401/moodle-latest-401.tgz
+        echo "Moodle download URL is accessible"
+    
+    - name: Test database connection
+      run: |
+        mysql -h 127.0.0.1 -P 3306 -u root -proot -e "SELECT VERSION();"
+    
+    - name: Validate shell script syntax
+      run: |
+        bash -n install_moodle.sh
+        echo "Shell script syntax is valid"
