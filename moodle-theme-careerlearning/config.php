@@ -27,23 +27,23 @@ defined('MOODLE_INTERNAL') || die();
 // Theme name
 $THEME->name = 'careerlearning';
 
-// Theme parents (we'll inherit from Boost for modern Bootstrap base)
+// Theme parents (inheriting from Boost for modern Bootstrap base)
 $THEME->parents = ['boost'];
 
-// Theme sheets
+// Theme sheets - custom CSS files
 $THEME->sheets = ['custom'];
 
 // Theme editor sheets
 $THEME->editor_sheets = [];
 
-// Theme SCSS
+// Theme SCSS - main SCSS compilation callback
 $THEME->scss = function($theme) {
     return theme_careerlearning_get_main_scss_content($theme);
 };
 
-// Theme layouts
+// Theme layouts - defining page layouts for different contexts
 $THEME->layouts = [
-    // Most backwards compatible layout without the blocks
+    // Base layout
     'base' => [
         'file' => 'columns2.php',
         'regions' => ['side-pre'],
@@ -68,7 +68,7 @@ $THEME->layouts = [
         'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
     ],
-    // Part of course, typical for modules - default page layout if $cm specified in require_login()
+    // Part of course, typical for modules
     'incourse' => [
         'file' => 'columns2.php',
         'regions' => ['side-pre'],
@@ -106,24 +106,24 @@ $THEME->layouts = [
         'regions' => [],
         'options' => ['langmenu' => true],
     ],
-    // Pages that appear in pop-up windows - no navigation, no blocks, no header
+    // Pages that appear in pop-up windows
     'popup' => [
         'file' => 'columns1.php',
         'regions' => [],
         'options' => ['nofooter' => true, 'nonavbar' => true],
     ],
-    // No blocks and minimal footer - used for legacy frame layouts only!
+    // No blocks and minimal footer
     'frametop' => [
         'file' => 'columns1.php',
         'regions' => [],
         'options' => ['nofooter' => true, 'nocoursefooter' => true],
     ],
-    // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible
+    // Embedded pages
     'embedded' => [
         'file' => 'embedded.php',
         'regions' => [],
     ],
-    // Used during upgrade and install, and for the 'This site is undergoing maintenance' message
+    // Used during upgrade and install
     'maintenance' => [
         'file' => 'maintenance.php',
         'regions' => [],
@@ -134,7 +134,7 @@ $THEME->layouts = [
         'regions' => [],
         'options' => ['nofooter' => true, 'nonavbar' => false],
     ],
-    // The pagelayout used when a redirection is occuring
+    // The pagelayout used when a redirection is occurring
     'redirect' => [
         'file' => 'embedded.php',
         'regions' => [],
@@ -153,27 +153,23 @@ $THEME->layouts = [
     ],
 ];
 
-// Theme enable dock
+// Disable docking
 $THEME->enable_dock = false;
 
-// Theme prescsss callback
+// Pre SCSS callback
 $THEME->prescsscallback = 'theme_careerlearning_get_pre_scss';
 
-// Theme extra scss callback
+// Extra SCSS callback
 $THEME->extrascsscallback = 'theme_careerlearning_get_extra_scss';
 
-// Theme render factory
+// Theme renderer factory
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 
-// Theme uses CSS post process
+// CSS tree post processor
 $THEME->csstreepostprocessor = 'theme_careerlearning_css_tree_post_processor';
 
-// Load the theme javascripts
-$THEME->javascripts = [];
-$THEME->javascripts_footer = [];
-
-// Remove blocks from right region
+// Block positions
 $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
 
-// Hide dock
+// Has edit switch
 $THEME->haseditswitch = true;

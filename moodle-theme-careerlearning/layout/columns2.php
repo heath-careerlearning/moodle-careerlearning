@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * CareerLearning theme version file.
+ * A two column layout for the CareerLearning theme.
  *
  * @package    theme_careerlearning
  * @copyright  2024 CareerLearning
@@ -24,11 +24,5 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2024010100;  // YYYYMMDDXX format
-$plugin->requires  = 2022112800;  // Requires Moodle 4.1 or later
-$plugin->component = 'theme_careerlearning';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.0.0';
-$plugin->dependencies = [
-    'theme_boost' => 2022112800,  // Boost theme dependency
-];
+// Include the common layout elements
+require_once($CFG->dirroot . '/theme/boost/layout/columns2.php');

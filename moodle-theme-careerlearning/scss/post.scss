@@ -1,0 +1,134 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Post SCSS for CareerLearning theme.
+ * This file is included after the main theme styles.
+ *
+ * @package    theme_careerlearning
+ * @copyright  2024 CareerLearning
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+// General layout improvements
+body {
+    background-color: $theme-secondary;
+}
+
+// Navigation improvements
+.navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    
+    .navbar-brand {
+        font-weight: 600;
+        color: $theme-primary;
+    }
+}
+
+// Card styling
+.card {
+    @include card-shadow;
+    border: none;
+    border-radius: $border-radius;
+    
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e5e5e5;
+        font-weight: 600;
+    }
+}
+
+// Button styling
+.btn {
+    @include button-style;
+    
+    &.btn-primary {
+        background-color: $theme-primary;
+        border-color: $theme-primary;
+        
+        &:hover {
+            background-color: darken($theme-primary, 10%);
+            border-color: darken($theme-primary, 10%);
+        }
+    }
+}
+
+// Course cards
+.course-card {
+    @include card-shadow;
+    border-radius: $border-radius;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+        transform: translateY(-2px);
+    }
+    
+    .course-card-img {
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .course-card-body {
+        padding: 1.5rem;
+    }
+}
+
+// Activity items
+.activity-item {
+    background-color: #fff;
+    border-radius: $border-radius-sm;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #e5e5e5;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        border-color: $theme-primary;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+}
+
+// Forms
+.form-control {
+    border-radius: $border-radius-sm;
+    border-color: #e5e5e5;
+    
+    &:focus {
+        border-color: $theme-primary;
+        box-shadow: 0 0 0 0.2rem rgba($theme-primary, 0.25);
+    }
+}
+
+// Dashboard improvements
+#page-my-index {
+    .dashboard-card {
+        @include card-shadow;
+        margin-bottom: 1.5rem;
+    }
+}
+
+// Responsive improvements
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+}
